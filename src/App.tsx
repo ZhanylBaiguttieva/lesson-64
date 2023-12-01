@@ -1,23 +1,22 @@
 
 import './App.css';
 import {NavLink, Route, Routes} from 'react-router-dom';
-import Posts from './containers/Posts/Posts';
+
 import PostForm from './containers/PostForm/PostForm';
 import About from './containers/About/About';
 import Contacts from './containers/Contacts/Contacts';
-import {useState} from 'react';
-import {Post} from './types';
+
+import PostItem from './containers/Post/PostItem';
+import Posts from './containers/Post/Posts';
+
+
 
 function App() {
-  const [posts, setPosts] =useState<Post[]>([
-    {id: '1', date:'01', title: 'First day'},
-    {id: '2', date:'02', title: 'Second day'},
-    {id: '3', date:'03', title: 'Third day'},
-  ]);
 
   return (
     <div>
-      <header style={{borderBottom:'1px solid blue', marginBottom: '10px', float: 'right' }}>
+        <h4 className="float-start"> My blog</h4>
+      <header>
         <NavLink to="/posts" >Home</NavLink>
         <span style={{margin: '0 10px'}}>|</span>
         <NavLink to="new-post">Add</NavLink>
@@ -26,12 +25,17 @@ function App() {
         <span style={{margin: '0 10px'}}>|</span>
         <NavLink to="contacts">Contacts</NavLink>
       </header>
-      <Routes>
-        <Route path='/about' element={(<About/>)}></Route>
-        <Route path='/contacts' element={(<Contacts/>)}></Route>
-        <Route path='/posts' element={(<Posts/>)}></Route>
-        <Route path='/new-post' element={(<PostForm/>)}></Route>
-      </Routes>
+      <div>
+        <Routes>
+          <Route path='/about' element={(<About/>)}></Route>
+          <Route path='/contacts' element={(<Contacts/>)}></Route>
+          <Route path='/' element={(<Posts />)}></Route>
+          <Route path='/posts' element={(<Posts />)}></Route>
+          <Route path="/post/:postId" element={(<PostItem />)}/>
+          <Route path='/new-post' element={(<PostForm/>)}></Route>
+          <Route path="/post/:postId/edit" element={(<PostForm/>)}/>
+        </Routes>
+      </div>
     </div>
   );
 }
