@@ -4,9 +4,6 @@ import {useCallback, useEffect, useState} from 'react';
 import axiosApi from '../../axiosApi';
 import {Post} from '../../types';
 
-// interface Props {
-//   onClick: React.MouseEventHandler;
-// }
 const PostItem = () => {
   const navigate=useNavigate();
   const [postInfo, setPostInfo] = useState<Post>();
@@ -19,12 +16,12 @@ const PostItem = () => {
 
     const postInfoId = params.postId;
     const postInfoTitle = data.title;
-    const postInfoDate = data.date;
+    const postInfoDate = data.dateTime;
     const postInfoBody = data.body;
 
     const postInfoObject: Post = {
       id: postInfoId,
-      date: postInfoDate,
+      dateTime: postInfoDate,
       title: postInfoTitle,
       body: postInfoBody,
     };
@@ -49,7 +46,7 @@ const PostItem = () => {
     <div className="row">
       <div className="col-sm-12 rounded-start">
         <div className="card-body mt-3  bg-warning">
-          <div className="card-title">{postInfo?.date}</div>
+          <div className="card-title">Created on: {postInfo?.dateTime}</div>
           <div>{postInfo?.title}</div>
           <div>{postInfo?.body}</div>
             <Link to={'/post/'+ params.postId + '/edit'}>Edit article</Link>

@@ -7,7 +7,7 @@ import {Post} from '../../types';
 const PostForm = () => {
   const navigate = useNavigate();
   const[newPost, setNewPost] = useState({
-    date: '',
+    dateTime: '',
     title: '',
     body: '',
   });
@@ -22,11 +22,22 @@ const PostForm = () => {
       [name]:value,
     }));
   }, []);
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
 
   const onFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
 
+    newPost.dateTime = getCurrentDateTime();
     try {
       await axiosApi.post('posts.json', newPost);
       navigate('/');
@@ -41,12 +52,12 @@ const PostForm = () => {
 
     const postEditedId = params.postId;
     const postEditedTitle = data.title;
-    const postEditedDate = data.date;
+    const postEditedDateTime = data.dateTime;
     const postEditedBody = data.body;
 
     const postEditedObject: Post = {
       id: postEditedId,
-      date: postEditedDate,
+      dateTime: postEditedDateTime,
       title: postEditedTitle,
       body: postEditedBody,
     };

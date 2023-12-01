@@ -1,15 +1,11 @@
 
-import './App.css';
 import {NavLink, Route, Routes} from 'react-router-dom';
-
 import PostForm from './containers/PostForm/PostForm';
 import About from './containers/About/About';
 import Contacts from './containers/Contacts/Contacts';
-
 import PostItem from './containers/Post/PostItem';
 import Posts from './containers/Post/Posts';
-
-
+import './App.css';
 
 function App() {
 
