@@ -11,7 +11,7 @@ const PostItem = () => {
   const navigate=useNavigate();
   const [postInfo, setPostInfo] = useState<Post>();
 
-  const params = useParams();
+  const params = useParams() as {postId: string};
 
   const fetchPostInfo = useCallback(async () => {
     const response = await axiosApi.get('posts/' + params.postId + '.json');
